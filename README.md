@@ -1,8 +1,7 @@
 # HTB Facts — Full Writeup
 
-**Difficulty:** Medium  
 **OS:** Linux  
-**Tags:** Web, MinIO, Camaleon CMS, Path Traversal, SSTI, Privilege Escalation
+**Tags:** Web, MinIO, Camaleon CMS, Path Traversal, Privilege Escalation
 
 ---
 
@@ -92,7 +91,7 @@ curl -v http://facts.htb:54321
 
 Headers confirm: `Server: MinIO`
 
-Enumerate potential bucket names (all return 403, confirming they exist):
+Probe potential bucket names (a 403 response alone does not confirm that a bucket exists):
 
 ```bash
 for bucket in facts backup uploads media files images data private secret admin internal; do
